@@ -74,10 +74,16 @@ namespace NMeCab
             this.Theta = MeCabParam.DefaultTheta;
             this.RcFile = MeCabParam.DefaultRcFile;
 
+#if !NETSTANDARD2_0
             Properties.Settings settings = Properties.Settings.Default;
             this.DicDir = settings.DicDir;
             this.UserDic = this.SplitStringArray(settings.UserDic, ',');
             this.OutputFormatType = settings.OutputFormatType;
+#else
+            this.DicDir = "dic";
+            this.UserDic = Array.Empty<string>();
+            this.OutputFormatType = "lattice";
+#endif
         }
 
         public void LoadDicRC()

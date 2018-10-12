@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2041
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibNMeCab", "LibNMeCab\LibNMeCab.csproj", "{3EE156E1-FEDE-4EC5-B64A-3287EC3AB2E3}"
 EndProject
@@ -16,6 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibNMeCabTest", "LibNMeCabTest\LibNMeCabTest.csproj", "{59B69A5D-B54E-4659-9CD6-502FCD7B0881}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibNMeCab35", "LibNMeCab35\LibNMeCab35.csproj", "{4FFE4221-2F41-446E-BE59-D9CFCDF91AC6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibNMeCabNetStandard", "LibNMeCabNetStandard\LibNMeCabNetStandard.csproj", "{08FFB130-15A0-432D-8A96-2CE194C73F66}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -97,8 +99,23 @@ Global
 		{4FFE4221-2F41-446E-BE59-D9CFCDF91AC6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{4FFE4221-2F41-446E-BE59-D9CFCDF91AC6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{4FFE4221-2F41-446E-BE59-D9CFCDF91AC6}.Release|x86.ActiveCfg = Release|Any CPU
+		{08FFB130-15A0-432D-8A96-2CE194C73F66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08FFB130-15A0-432D-8A96-2CE194C73F66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08FFB130-15A0-432D-8A96-2CE194C73F66}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{08FFB130-15A0-432D-8A96-2CE194C73F66}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{08FFB130-15A0-432D-8A96-2CE194C73F66}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{08FFB130-15A0-432D-8A96-2CE194C73F66}.Debug|x86.Build.0 = Debug|Any CPU
+		{08FFB130-15A0-432D-8A96-2CE194C73F66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08FFB130-15A0-432D-8A96-2CE194C73F66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08FFB130-15A0-432D-8A96-2CE194C73F66}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{08FFB130-15A0-432D-8A96-2CE194C73F66}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{08FFB130-15A0-432D-8A96-2CE194C73F66}.Release|x86.ActiveCfg = Release|Any CPU
+		{08FFB130-15A0-432D-8A96-2CE194C73F66}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AD02F408-6371-450C-B436-348AA8B3FB16}
 	EndGlobalSection
 EndGlobal
