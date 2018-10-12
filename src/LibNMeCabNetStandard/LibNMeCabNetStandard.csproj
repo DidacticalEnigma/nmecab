@@ -2,10 +2,28 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <PackageProjectUrl>https://github.com/milleniumbug/nmecab</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/milleniumbug/nmecab/blob/master/COPYING</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/milleniumbug/nmecab</RepositoryUrl>
+    <PackageId>NMeCabNetStandard</PackageId>
+    <Authors>milleniumbug</Authors>
+    <Version>0.7.0</Version>
+    <IncludeSymbols>true</IncludeSymbols>
+    <Description>An unofficial, .NET Standard port of NMeCab
+
+NMeCab is an open-source Japanese morphological analysis library.
+
+NMeCab was ported from MeCab by Tsuyoshi Komuta, and is released under any of the GPL (see the file GPL) or the LGPL (see the file LGPL).
+
+MeCab is copyrighted free software by Taku Kudo &lt;taku@chasen.org&gt; and Nippon Telegraph and Telephone Corporation, and is released under any of the GPL (see the file GPL), the LGPL (see the file LGPL), or the BSD License (see the file BSD).</Description>
+    <Copyright>Copyright (c) 2011-2014 Tsuyoshi Komuta.</Copyright>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
@@ -65,7 +83,6 @@
     <Compile Include="..\LibNMeCab\MeCabNodeStat.cs" Link="MeCabNodeStat.cs" />
     <Compile Include="..\LibNMeCab\MeCabParam.cs" Link="MeCabParam.cs" />
     <Compile Include="..\LibNMeCab\MeCabTagger.cs" Link="MeCabTagger.cs" />
-    <Compile Include="..\LibNMeCab\Properties\SharedAssemblyInfo.cs" Link="Properties\SharedAssemblyInfo.cs" />
   </ItemGroup>
 
   <ItemGroup>
