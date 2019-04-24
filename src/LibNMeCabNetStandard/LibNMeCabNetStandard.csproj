@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageProjectUrl>https://github.com/milleniumbug/nmecab</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/milleniumbug/nmecab/blob/master/COPYING</PackageLicenseUrl>
     <RepositoryUrl>https://github.com/milleniumbug/nmecab</RepositoryUrl>
     <PackageId>NMeCabNetStandard</PackageId>
     <Authors>milleniumbug</Authors>
@@ -17,6 +16,7 @@ NMeCab was ported from MeCab by Tsuyoshi Komuta, and is released under any of th
 
 MeCab is copyrighted free software by Taku Kudo &lt;taku@chasen.org&gt; and Nippon Telegraph and Telephone Corporation, and is released under any of the GPL (see the file GPL), the LGPL (see the file LGPL), or the BSD License (see the file BSD).</Description>
     <Copyright>Copyright (c) 2011-2014 Tsuyoshi Komuta.</Copyright>
+    <PackageLicenseExpression>GPL-2.0-only OR LGPL-2.1-only</PackageLicenseExpression>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
