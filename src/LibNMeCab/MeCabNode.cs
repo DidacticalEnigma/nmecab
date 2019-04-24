@@ -65,14 +65,14 @@ namespace NMeCab
         }
 
         private uint featurePos;
-        private MeCabDictionary Dictionary { get; set; }
+        private IMeCabDictionary Dictionary { get; set; }
 
         /// <summary>
         /// 素性情報を遅延読込するための値設定
         /// </summary>
         /// <param name="featurePos">辞書内の素性情報の位置</param>
         /// <param name="dic">検索元の辞書</param>
-        internal void SetFeature(uint featurePos, MeCabDictionary dic)
+        internal void SetFeature(uint featurePos, IMeCabDictionary dic)
         {
             this.feature = null;
             this.featurePos = featurePos;

@@ -6,22 +6,25 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
-#if MMF_MTX
 using System.IO.MemoryMappedFiles;
-#endif
 
 namespace NMeCab.Core
 {
-    public class Connector : IDisposable
+    public interface IConnector : IDisposable
+    {
+        ushort LSize { get; }
+        ushort RSize { get; }
+        void Open(MeCabParam param);
+        void Open(string fileName);
+        int Cost(MeCabNode lNode, MeCabNode rNode);
+    }
+
+    public class ConnectorMMF : IConnector
     {
         private const string MatrixFile = "matrix.bin";
 
-#if MMF_MTX
         private MemoryMappedFile mmf;
         private MemoryMappedViewAccessor matrix;
-#else
-        private short[] matrix;
-#endif
 
         public ushort LSize { get; private set; }
 
@@ -32,8 +35,6 @@ namespace NMeCab.Core
             string fileName = Path.Combine(param.DicDir, MatrixFile);
             this.Open(fileName);
         }
-
-#if MMF_MTX
 
         public void Open(string fileName)
         {
@@ -58,8 +59,56 @@ namespace NMeCab.Core
             }
         }
 
-#else
+        public int Cost(MeCabNode lNode, MeCabNode rNode)
+        {
+            int pos = lNode.RCAttr + this.LSize * rNode.LCAttr;
+            return this.matrix.ReadInt16(pos * sizeof(short)) + rNode.WCost;
+        }
 
+        private bool disposed;
+
+        /// <summary>
+        /// 使用中のリソースを開放する
+        /// </summary>
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed) return;
+
+            if (disposing)
+            {
+                if (this.mmf != null) this.mmf.Dispose();
+                if (this.matrix != null) this.matrix.Dispose();
+            }
+
+            this.disposed = true;
+        }
+
+        ~ConnectorMMF()
+        {
+            Dispose(false);
+        }
+    }
+
+
+    public class Connector : IConnector
+    {
+        private const string MatrixFile = "matrix.bin";
+        private short[] matrix;
+        public ushort LSize { get; private set; }
+
+        public ushort RSize { get; private set; }
+
+        public void Open(MeCabParam param)
+        {
+            string fileName = Path.Combine(param.DicDir, MatrixFile);
+            this.Open(fileName);
+        }
         public void Open(string fileName)
         {
             using (FileStream stream = new FileStream(fileName, FileMode.Open, FileAccess.Read))
@@ -84,17 +133,10 @@ namespace NMeCab.Core
                 throw new MeCabInvalidFileException("file size is invalid", fileName);
         }
 
-#endif
-
         public int Cost(MeCabNode lNode, MeCabNode rNode)
         {
             int pos = lNode.RCAttr + this.LSize * rNode.LCAttr;
-
-#if MMF_MTX
-            return this.matrix.ReadInt16(pos * sizeof(short)) + rNode.WCost;
-#else
             return this.matrix[pos] + rNode.WCost;
-#endif
         }
 
         private bool disposed;
@@ -114,10 +156,7 @@ namespace NMeCab.Core
 
             if (disposing)
             {
-#if MMF_MTX
-                if (this.mmf != null) this.mmf.Dispose();
-                if (this.matrix != null) this.matrix.Dispose();
-#endif
+
             }
 
             this.disposed = true;

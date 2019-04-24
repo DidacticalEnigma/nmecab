@@ -12,6 +12,8 @@ namespace NMeCab
 {
     public class MeCabParam
     {
+        public bool UseMemoryMappedFile { get; set; }
+
         public string DicDir { get; set; }
 
         public string[] UserDic { get; set; }

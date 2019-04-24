@@ -20,8 +20,8 @@ namespace NMeCab.Core
         private const int DefaltMaxGroupingSize = 24;
         private const string BosKey = "BOS/EOS";
 
-        private MeCabDictionary[] dic;
-        private readonly MeCabDictionary unkDic = new MeCabDictionary();
+        private IMeCabDictionary[] dic;
+        private IMeCabDictionary unkDic;
         private string bosFeature;
         private string unkFeature;
         private Token[][] unkTokens;
@@ -35,7 +35,12 @@ namespace NMeCab.Core
 
         public void Open(MeCabParam param)
         {
-            this.dic = new MeCabDictionary[param.UserDic.Length + 1];
+            var dictFactory = param.UseMemoryMappedFile
+                ? new Func<IMeCabDictionary>(() => new MeCabDictionaryMMF())
+                : new Func<IMeCabDictionary>(() => new MeCabDictionary());
+            this.unkDic = dictFactory();
+
+            this.dic = new IMeCabDictionary[param.UserDic.Length + 1];
 
             string prefix = param.DicDir;
 
@@ -45,7 +50,7 @@ namespace NMeCab.Core
             if (this.unkDic.Type != DictionaryType.Unk)
                 throw new MeCabInvalidFileException("not a unk dictionary", this.unkDic.FileName);
 
-            MeCabDictionary sysDic = new MeCabDictionary();
+            IMeCabDictionary sysDic = dictFactory();
             sysDic.Open(Path.Combine(prefix, SysDicFile));
             if (sysDic.Type != DictionaryType.Sys)
                 throw new MeCabInvalidFileException("not a system dictionary", sysDic.FileName);
@@ -53,7 +58,7 @@ namespace NMeCab.Core
 
             for (int i = 0; i < param.UserDic.Length; i++)
             {
-                MeCabDictionary d = new MeCabDictionary();
+                IMeCabDictionary d = dictFactory();
                 d.Open(Path.Combine(prefix, param.UserDic[i]));
                 if (d.Type != DictionaryType.Usr)
                     throw new MeCabInvalidFileException("not a user dictionary", d.FileName);
@@ -66,7 +71,7 @@ namespace NMeCab.Core
             for (int i = 0; i < this.unkTokens.Length; i++)
             {
                 string key = this.property.Name(i);
-                DoubleArray.ResultPair n = this.unkDic.ExactMatchSearch(key);
+                DoubleArrayResultPair n = this.unkDic.ExactMatchSearch(key);
                 if (n.Value == -1)
                     throw new MeCabInvalidFileException("cannot find UNK category: " + key, this.unkDic.FileName);
                 this.unkTokens[i] = this.unkDic.GetToken(n);
@@ -97,9 +102,9 @@ namespace NMeCab.Core
             if (end - begin > ushort.MaxValue) end = begin + ushort.MaxValue;
             char* begin2 = property.SeekToOtherType(begin, end, this.space, &cInfo, &cLen);
 
-            DoubleArray.ResultPair* daResults = stackalloc DoubleArray.ResultPair[DAResultSize];
+            DoubleArrayResultPair* daResults = stackalloc DoubleArrayResultPair[DAResultSize];
 
-            foreach (MeCabDictionary it in this.dic)
+            foreach (var it in this.dic)
             {
                 int n = it.CommonPrefixSearch(begin2, (int)(end - begin2), daResults, DAResultSize);
 
@@ -158,7 +163,7 @@ namespace NMeCab.Core
             return resultNode;
         }
 
-        private void ReadNodeInfo(MeCabDictionary dic, Token token, MeCabNode node)
+        private void ReadNodeInfo(IMeCabDictionary dic, Token token, MeCabNode node)
         {
             node.LCAttr = token.LcAttr;
             node.RCAttr = token.RcAttr;
@@ -229,7 +234,7 @@ namespace NMeCab.Core
             if (disposing)
             {
                 if (this.dic != null)
-                    foreach (MeCabDictionary d in this.dic)
+                    foreach (var d in this.dic)
                         if (d != null) d.Dispose();
 
                 if (this.unkDic != null) this.unkDic.Dispose();

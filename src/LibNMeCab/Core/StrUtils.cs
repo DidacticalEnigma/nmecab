@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-#if MMF_DIC
 using System.IO.MemoryMappedFiles;
-#endif
 
 namespace NMeCab.Core
 {
@@ -71,8 +69,6 @@ namespace NMeCab.Core
             }
         }
 
-#if MMF_DIC
-
         /// <summary>
         /// MemoryMappedViewAccessorから終端が\0で表された文字列を取り出す。
         /// </summary>
@@ -110,8 +106,6 @@ namespace NMeCab.Core
             //バッファ配列を文字列にデコード
             return enc.GetString(buff, 0, byteCount);
         }
-
-#endif
 
         /// <summary>
         /// 指定の名前に対応するエンコーディングを取得する（.NET FWが対応していない名前にもアドホックに対応）

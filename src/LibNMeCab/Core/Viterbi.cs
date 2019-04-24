@@ -20,8 +20,8 @@ namespace NMeCab.Core
             public float Z;
         }
 
-        private readonly Tokenizer tokenizer = new Tokenizer();
-        private readonly Connector connector = new Connector();
+        private Tokenizer tokenizer;
+        private IConnector connector;
 
         private MeCabLatticeLevel level;
         private float theta;
@@ -70,7 +70,11 @@ namespace NMeCab.Core
 
         public void Open(MeCabParam param)
         {
+            tokenizer = new Tokenizer();
             tokenizer.Open(param);
+            connector = param.UseMemoryMappedFile
+                ? new ConnectorMMF() as IConnector
+                : new Connector() as IConnector;
             connector.Open(param);
 
             this.costFactor = param.CostFactor;

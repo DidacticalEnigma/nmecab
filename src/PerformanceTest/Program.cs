@@ -22,10 +22,16 @@ namespace PerformanceTest
 
             Console.WriteLine("\t\t\tProcessTime\tTotalMemory");
 
+            MeCabParam param = new MeCabParam();
+            param.DicDir = @"D:\DidacticalEnigma-Data\mecab\ipadic";
+#if MMF
+            param.UseMemoryMappedFile = true;
+#endif
+
             //解析準備処理
             GC.Collect();
             sw.Start();
-            MeCabTagger tagger = MeCabTagger.Create();
+            MeCabTagger tagger = MeCabTagger.Create(param);
             sw.Stop();
             Console.WriteLine("OpenTagger:\t\t{0:0.000}sec\t{1:#,000}byte",
                               sw.Elapsed.TotalSeconds, GC.GetTotalMemory(false));
