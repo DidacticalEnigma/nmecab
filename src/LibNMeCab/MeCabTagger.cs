@@ -14,8 +14,6 @@ namespace NMeCab
         private readonly Viterbi viterbi = new Viterbi();
         private readonly Writer writer = new Writer();
 
-        #region Mode
-
         /// <summary>
         /// 部分解析モード
         /// </summary>
@@ -70,20 +68,12 @@ namespace NMeCab
             set { this.ThrowIfDisposed(); this.writer.OutputFormatType = value; }
         }
 
-        #endregion
-
-        #region Constractor
-
         /// <summary>
         /// コンストラクタ
         /// </summary>
         private MeCabTagger()
         {
         }
-
-        #endregion
-
-        #region Open/Create
 
         /// <summary>
         /// MeCabTaggerを開く
@@ -118,10 +108,6 @@ namespace NMeCab
             tagger.Open(param);
             return tagger;
         }
-
-        #endregion
-
-        #region Parse
 
         /// <summary>
         /// 解析を行う
@@ -175,10 +161,6 @@ namespace NMeCab
 
             return this.viterbi.Analyze(str, len);
         }
-
-        #endregion
-
-        #region NBest
 
         /// <summary>
         /// 解析を行い結果を確からしいものから順番に取得する
@@ -241,10 +223,6 @@ namespace NMeCab
             return os.ToString();
         }
 
-        #endregion
-
-        #region Dispose
-
         private bool disposed;
 
         /// <summary>
@@ -278,7 +256,5 @@ namespace NMeCab
             if (this.disposed)
                 throw new ObjectDisposedException(this.GetType().FullName);
         }
-
-        #endregion
     }
 }

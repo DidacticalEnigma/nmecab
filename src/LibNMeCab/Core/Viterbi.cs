@@ -11,8 +11,6 @@ namespace NMeCab.Core
 {
     public class Viterbi : IDisposable
     {
-        #region InnerClass
-
         private class ThreadData
         {
             public MeCabNode EosNode;
@@ -21,10 +19,6 @@ namespace NMeCab.Core
             public MeCabNode[] BeginNodeList;
             public float Z;
         }
-
-        #endregion
-
-        #region Field/Property
 
         private readonly Tokenizer tokenizer = new Tokenizer();
         private readonly Connector connector = new Connector();
@@ -74,10 +68,6 @@ namespace NMeCab.Core
             }
         }
 
-        #endregion
-
-        #region Open/Clear
-
         public void Open(MeCabParam param)
         {
             tokenizer.Open(param);
@@ -96,10 +86,6 @@ namespace NMeCab.Core
             this.tokenizer.Clear();
         }
 #endif
-
-        #endregion
-
-        #region AnalyzeStart
 
         public unsafe MeCabNode Analyze(char* str, int len)
         {
@@ -126,10 +112,6 @@ namespace NMeCab.Core
             this.analyze(str, len, work);
             return this.buildLattice(work);
         }
-
-        #endregion
-
-        #region Analyze
 
         private unsafe delegate void AnalyzeAction(char* str, int len, ThreadData work);
 
@@ -215,10 +197,6 @@ namespace NMeCab.Core
             }
         }
 
-        #endregion
-
-        #region Connect
-
         private delegate void ConnectAction(int pos, MeCabNode rNode, ThreadData work);
 
         private ConnectAction connect;
@@ -295,10 +273,6 @@ namespace NMeCab.Core
             }
         }
 
-        #endregion
-
-        #region Lattice
-
         private delegate MeCabNode BuildLatticeFunc(ThreadData work);
 
         private BuildLatticeFunc buildLattice;
@@ -340,10 +314,6 @@ namespace NMeCab.Core
             }
             return work.BosNode;
         }
-
-        #endregion
-
-        #region Partial
 
         private unsafe string InitConstraints(char* sentence, int sentenceLen, ThreadData work)
         {
@@ -427,10 +397,6 @@ namespace NMeCab.Core
             return true;
         }
 
-        #endregion
-
-        #region Dispose
-
         private bool disposed;
 
         /// <summary>
@@ -459,7 +425,5 @@ namespace NMeCab.Core
         {
             this.Dispose(false);
         }
-
-        #endregion
     }
 }

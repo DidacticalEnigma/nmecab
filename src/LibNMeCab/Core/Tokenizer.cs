@@ -14,17 +14,11 @@ namespace NMeCab.Core
 {
     public class Tokenizer : IDisposable
     {
-        #region Const
-
         private const string SysDicFile = "sys.dic";
         private const string UnkDicFile = "unk.dic";
         private const int DAResultSize = 512;
         private const int DefaltMaxGroupingSize = 24;
         private const string BosKey = "BOS/EOS";
-
-        #endregion
-
-        #region Field
 
         private MeCabDictionary[] dic;
         private readonly MeCabDictionary unkDic = new MeCabDictionary();
@@ -38,10 +32,6 @@ namespace NMeCab.Core
         [ThreadStaticAttribute]
         private static uint id;
 #endif
-
-        #endregion
-
-        #region Open/Clear
 
         public void Open(MeCabParam param)
         {
@@ -97,10 +87,6 @@ namespace NMeCab.Core
             Tokenizer.id = 0u;
         }
 #endif
-
-        #endregion
-
-        #region Lookup
 
         public unsafe MeCabNode Lookup(char* begin, char* end)
         {
@@ -202,10 +188,6 @@ namespace NMeCab.Core
             }
         }
 
-        #endregion
-
-        #region Get Node
-
         public MeCabNode GetBosNode()
         {
             MeCabNode bosNode = this.GetNewNode();
@@ -231,10 +213,6 @@ namespace NMeCab.Core
 #endif
             return node;
         }
-
-        #endregion
-
-        #region Dispose
 
         private bool disposed;
 
@@ -264,7 +242,5 @@ namespace NMeCab.Core
         {
             this.Dispose(false);
         }
-
-        #endregion
     }
 }

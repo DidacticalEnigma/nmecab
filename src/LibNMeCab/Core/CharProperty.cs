@@ -11,8 +11,6 @@ namespace NMeCab.Core
 {
     public class CharProperty
     {
-        #region Const/Field/Property
-
         private const string CharPropertyFile = "char.bin";
 
         private string[] cList;
@@ -23,10 +21,6 @@ namespace NMeCab.Core
         {
             get { return this.cList.Length; }
         }
-
-        #endregion
-
-        #region Open
 
         public void Open(string dicDir)
         {
@@ -62,10 +56,6 @@ namespace NMeCab.Core
             }
         }
 
-        #endregion
-
-        #region Get Infometion
-
         public string Name(int i)
         {
             return this.cList[i];
@@ -94,7 +84,5 @@ namespace NMeCab.Core
         {
             return this.charInfoList[c];
         }
-
-        #endregion
     }
 }

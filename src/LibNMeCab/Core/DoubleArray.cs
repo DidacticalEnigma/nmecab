@@ -17,8 +17,6 @@ namespace NMeCab.Core
     /// </summary>
     public class DoubleArray : IDisposable
     {
-        #region Array
-
         private struct Unit
         {
             public readonly int Base;
@@ -63,10 +61,6 @@ namespace NMeCab.Core
 
 #endif
 
-        #endregion
-
-        #region Open
-
 #if MMF_DIC
 
         public void Open(MemoryMappedFile mmf, long offset, long size)
@@ -87,10 +81,6 @@ namespace NMeCab.Core
         }
 
 #endif
-
-        #endregion
-
-        #region Search
 
         public struct ResultPair
         {
@@ -199,10 +189,6 @@ namespace NMeCab.Core
 #endif
         }
 
-        #endregion
-
-        #region Dispose
-
         private bool disposed;
 
         public void Dispose()
@@ -229,7 +215,5 @@ namespace NMeCab.Core
         {
             this.Dispose(false);
         }
-
-        #endregion
     }
 }

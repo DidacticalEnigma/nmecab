@@ -10,8 +10,6 @@ namespace NMeCab.Core
 {
     public class MeCabPath
     {
-        #region  Const/Field/Property
-
         public MeCabNode RNode { get; set; }
 
         public MeCabPath RNext { get; set; }
@@ -24,10 +22,6 @@ namespace NMeCab.Core
 
         public float Prob { get; set; }
 
-        #endregion
-
-        #region Method
-
         public override string ToString()
         {
             return string.Format("[Cost:{0}][Prob:{1}][LNode:{2}][RNode;{3}]",
@@ -37,7 +31,5 @@ namespace NMeCab.Core
                                  this.RNode);
 
         }
-
-        #endregion
     }
 }

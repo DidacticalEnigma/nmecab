@@ -11,8 +11,6 @@ namespace NMeCab.Core
 {
     public struct Token
     {
-        #region  Const/Field/Property
-
         /// <summary>
         /// 右文脈 id
         /// </summary>
@@ -43,10 +41,6 @@ namespace NMeCab.Core
         /// </summary>
         public uint Compound { get; set; }
 
-        #endregion
-
-        #region Method
-
         public static Token Create(BinaryReader reader)
         {
             return new Token()
@@ -70,7 +64,5 @@ namespace NMeCab.Core
                                  this.Feature,
                                  this.Compound);
         }
-
-        #endregion
     }
 }

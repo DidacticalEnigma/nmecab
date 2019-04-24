@@ -10,8 +10,6 @@ namespace NMeCab.Core
 {
     public struct CharInfo
     {
-        #region  Const/Field/Property
-
         private readonly uint bits;
 
         /// <summary>
@@ -69,18 +67,10 @@ namespace NMeCab.Core
             get { return BitUtils.GetFlag(this.bits, 18 + 8 + 4 + 1); }
         }
 
-        #endregion
-
-        #region Constractor
-
         public CharInfo(uint bits)
         {
             this.bits = bits;
         }
-
-        #endregion
-
-        #region Method
 
         /// <summary>
         /// 互換カテゴリ判定
@@ -101,7 +91,5 @@ namespace NMeCab.Core
                                  this.Group,
                                  this.Invoke);
         }
-
-        #endregion
     }
 }

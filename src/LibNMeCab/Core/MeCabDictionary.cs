@@ -14,8 +14,6 @@ namespace NMeCab.Core
 {
     public class MeCabDictionary : IDisposable
     {
-        #region  Const/Field/Property
-
         private const uint DictionaryMagicID = 0xEF718F77u;
         private const uint DicVersion = 102u;
 
@@ -66,10 +64,6 @@ namespace NMeCab.Core
         /// 辞書のファイル名
         /// </summary>
         public string FileName { get; private set; }
-
-        #endregion
-
-        #region Open
 
 #if MMF_DIC
 
@@ -167,10 +161,6 @@ namespace NMeCab.Core
 
 #endif
 
-        #endregion
-
-        #region Search
-
         public unsafe DoubleArray.ResultPair ExactMatchSearch(string key)
         {
             fixed (char* pKey = key)
@@ -214,10 +204,6 @@ namespace NMeCab.Core
             return n;
         }
 
-        #endregion
-
-        #region Get Infomation
-
         public unsafe Token[] GetToken(DoubleArray.ResultPair n)
         {
             Token[] dist = new Token[0xFF & n.Value];
@@ -235,10 +221,6 @@ namespace NMeCab.Core
             return StrUtils.GetString(this.features, (long)featurePos, this.encoding);
         }
 
-        #endregion
-
-        #region etc.
-
         public bool IsCompatible(MeCabDictionary d)
         {
             return (this.Version == d.Version &&
@@ -246,10 +228,6 @@ namespace NMeCab.Core
                     this.RSize == d.RSize &&
                     this.CharSet == d.CharSet);
         }
-
-        #endregion
-
-        #region Dispose
 
         private bool disposed;
 
@@ -283,7 +261,5 @@ namespace NMeCab.Core
         {
             this.Dispose(false);
         }
-
-        #endregion
     }
 }

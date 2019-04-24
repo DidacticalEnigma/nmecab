@@ -14,8 +14,6 @@ namespace NMeCab.Core
 {
     public class Connector : IDisposable
     {
-        #region Const/Field/Property
-
         private const string MatrixFile = "matrix.bin";
 
 #if MMF_MTX
@@ -28,10 +26,6 @@ namespace NMeCab.Core
         public ushort LSize { get; private set; }
 
         public ushort RSize { get; private set; }
-
-        #endregion
-
-        #region Open
 
         public void Open(MeCabParam param)
         {
@@ -92,10 +86,6 @@ namespace NMeCab.Core
 
 #endif
 
-        #endregion
-
-        #region Cost
-
         public int Cost(MeCabNode lNode, MeCabNode rNode)
         {
             int pos = lNode.RCAttr + this.LSize * rNode.LCAttr;
@@ -106,10 +96,6 @@ namespace NMeCab.Core
             return this.matrix[pos] + rNode.WCost;
 #endif
         }
-
-        #endregion
-
-        #region Dispose
 
         private bool disposed;
 
@@ -141,7 +127,5 @@ namespace NMeCab.Core
         {
             Dispose(false);
         }
-
-        #endregion
     }
 }
