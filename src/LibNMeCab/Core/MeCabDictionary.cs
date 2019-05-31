@@ -289,8 +289,8 @@ namespace NMeCab.Core
 
         public void Open(string filePath)
         {
-            this.mmf = MemoryMappedFile.CreateFromFile(filePath, FileMode.Open,
-                                                       null, 0L, MemoryMappedFileAccess.Read);
+            this.mmf = MemoryMappedFile.CreateFromFile(File.Open(filePath, FileMode.Open, FileAccess.Read, FileShare.Read),
+                                                       null, 0L, MemoryMappedFileAccess.Read, HandleInheritability.None, leaveOpen: false);
             this.Open(this.mmf, filePath);
         }
 

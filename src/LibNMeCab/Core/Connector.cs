@@ -39,8 +39,13 @@ namespace NMeCab.Core
         public void Open(string fileName)
         {
             //MMFインスタンスを生成するが、後でDisposeするために保持しておく
-            this.mmf = MemoryMappedFile.CreateFromFile(fileName, FileMode.Open,
-                                                        null, 0L, MemoryMappedFileAccess.Read);
+            this.mmf = MemoryMappedFile.CreateFromFile(
+                File.Open(fileName, FileMode.Open, FileAccess.Read, FileShare.Read), 
+                null,
+                0L,
+                MemoryMappedFileAccess.Read,
+                HandleInheritability.None,
+                leaveOpen: false);
             this.Open(this.mmf);
         }
 
