@@ -6,7 +6,7 @@
     <RepositoryUrl>https://github.com/milleniumbug/nmecab</RepositoryUrl>
     <PackageId>NMeCabNetStandard</PackageId>
     <Authors>milleniumbug</Authors>
-    <Version>0.7.2</Version>
+    <Version>0.7.3</Version>
     <IncludeSymbols>true</IncludeSymbols>
     <Description>An unofficial, .NET Standard port of NMeCab
 
